@@ -1,0 +1,119 @@
+### Signup
+
+POST http://localhost:3000/api/auth/signup
+Content-Type: application/json
+
+{
+    "username" : "amitwa233", 
+    "password" : "12345678"
+
+}
+
+### Login
+
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+    "username" : "amithanshu", 
+    "password" : "12345678"
+
+}
+
+### Me
+
+GET http://localhost:3000/api/me
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFtaXRoIiwiaWF0IjoxNjg3MzA0NzMzfQ.MGloCJNCk0HCfnByoXy67te7OoptxTCEbyTixIUrSXY
+
+### Create Profile
+
+POST http://localhost:3000/api/user/createprofile
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFtaXRoIiwiaWF0IjoxNjg3MzA0NzMzfQ.MGloCJNCk0HCfnByoXy67te7OoptxTCEbyTixIUrSXY
+
+{
+  "username": "amith",
+  "bio": "this is some bio",
+  "dp": "abuffer1232332ldfkd34"
+}
+
+### Get Profile
+
+POST http://localhost:3000/api/user/getprofile
+Content-Type: application/json
+
+{
+  "username": "amith"
+}
+
+### Save post
+
+POST http://localhost:3000/api/post/savepost
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFtaXRoIiwiaWF0IjoxNjg3MzA0NzMzfQ.MGloCJNCk0HCfnByoXy67te7OoptxTCEbyTixIUrSXY
+
+{
+  "username": "amith",
+  "userImg": "kkk",
+  "postImg": "dflkdf",
+  "body": {
+    "title": "this is a title",
+    "body": "this is about the post thas was just saved"
+  }
+}
+
+### get Feed
+
+GET http://localhost:3000/api/post/getfeed
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFtaXRoIiwiaWF0IjoxNjg3MzA0NzMzfQ.MGloCJNCk0HCfnByoXy67te7OoptxTCEbyTixIUrSXY
+
+### user post
+
+POST http://localhost:3000/api/post/userpost
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFtaXRoIiwiaWF0IjoxNjg3MzA0NzMzfQ.MGloCJNCk0HCfnByoXy67te7OoptxTCEbyTixIUrSXY
+
+{
+  "username": "amith"
+}
+
+### create contact
+
+POST http://localhost:3000/api/contact/createcontact
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFtaXRoIiwiaWF0IjoxNjg3MzA0NzMzfQ.MGloCJNCk0HCfnByoXy67te7OoptxTCEbyTixIUrSXY
+
+{
+  "username": "amith"
+}
+
+### follow
+
+POST http://localhost:3000/api/contact/follow
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFtaXRoIiwiaWF0IjoxNjg3MzA0NzMzfQ.MGloCJNCk0HCfnByoXy67te7OoptxTCEbyTixIUrSXY
+
+{
+  "follow": "yumisan"
+}
+
+### is following
+
+POST http://localhost:3000/api/contact/isfollowing
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFtaXRoIiwiaWF0IjoxNjg3MzA0NzMzfQ.MGloCJNCk0HCfnByoXy67te7OoptxTCEbyTixIUrSXY
+
+{
+  "follow": "yumisan"
+}
+
+### unfollow
+
+POST http://localhost:3000/api/contact/unfollow
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFtaXRoIiwiaWF0IjoxNjg3MzA0NzMzfQ.MGloCJNCk0HCfnByoXy67te7OoptxTCEbyTixIUrSXY
+
+{
+  "unfollow": "yumisan"
+}

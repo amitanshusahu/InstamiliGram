@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    font-family: 'DM Sans', sans-serif;
+    animation: fade 0.3s ease-in-out;
+}
+
+@keyframes fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes pop {
+  from {scale : 0;}
+  to { scale: 1;}
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    /* overflow: hidden; */
+}
+
+p{
+  font-size: 14px;
+}
+
+input, button, textarea {
+    padding: 10px;
+    font-weight: 500;
+    border-radius: 5px;
+    resize: none;
+    outline: none;
+    font-size: 14px;
+}
+
+input {
+  border: 2px solid rgb(238, 238, 238);
+}
+
+input:focus, textarea:focus{
+  outline: 1px solid rgb(170, 170, 170);
+}
+
+textarea {
+  padding: 15px;
+  border: 2px solid rgb(235, 235, 235);
+  color: rgb(75, 75, 75);
+}
+
+button {
+  background-color: rgb(0, 132, 255);
+  color: white;
+  border: none;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+button:hover{
+  opacity: 0.9;
+}
+
+button:focus{
+  opacity: 0.7;
+}
