@@ -1,1 +1,1 @@
-# A simple chat app..
+# InstamiliGram

@@ -3,7 +3,7 @@ import { Chat, Trending, Reel, Bell, Home, Add } from '../../assets/icons'
 import { useNavigate } from "react-router-dom";
 import { USERNAME, USER_PROFILE } from "../../kv";
 
-export default function Nav({setShowModal, user}) {
+export default function Nav({setShowPostModal, setShowStatusUploadModal, user}) {
 
   const navigate = useNavigate();
 
@@ -24,8 +24,8 @@ export default function Nav({setShowModal, user}) {
           <li id="post"> 
             
             <ul id="action-modal">
-              <li onClick={ () => {setShowModal(true)}}> <button>⭐ Create A Post</button></li>
-              <li> <button>⭐ Create A Rell</button></li>
+              <li onClick={ () => {setShowPostModal(true)}}> <button>⭐ Create A Post</button></li>
+              <li onClick={ () => {setShowStatusUploadModal(true)}}> <button>⭐ Update Status</button></li>
               <li> <button style={{color: "lightcoral"}}>💔 Logout</button></li>
             </ul>
 
@@ -77,7 +77,7 @@ const StyledDiv = styled.div`
 
           #action-modal{
             position: absolute;
-            width: 150px;
+            width: max-content;
             /* left: 60px; */
             bottom: 60px;
             background-color: #ffffff;

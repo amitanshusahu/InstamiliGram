@@ -1,15 +1,13 @@
 import styled from "styled-components"
 import uploadIcon from "../../../../assets/upload.jpg"
 import { useState } from "react";
-import { TOKEN, USERNAME, USER_PROFILE, postSavePost } from "../../../../kv";
+import { TOKEN, USERNAME, USER_PROFILE, postUploadStauts } from "../../../../kv";
 
-export default function PostModal({setShowPostModal, user}) {
+export default function StatusUploadModal({ setShowStatusUploadModal, user}) {
 
-  const [postImg, setPostImg] = useState(uploadIcon);
-  const [postBody, setPostBody] = useState({
-    title: null,
-    body: null,
-  });
+
+  const [statusImg, setstatusImg] = useState(uploadIcon);
+  const [caption , setCaption] = useState();
 
   const handelImage = (e) => {
     // create a file input dynamically
@@ -23,7 +21,7 @@ export default function PostModal({setShowPostModal, user}) {
       if (file) {
         const reader = new FileReader();
         reader.onload = () => {
-          setPostImg(reader.result);
+          setstatusImg(reader.result);
         };
         reader.readAsDataURL(file);
       }
@@ -33,36 +31,32 @@ export default function PostModal({setShowPostModal, user}) {
     fileInput.click();
   }
 
-  const handelChage = (e) => {
-    setPostBody({...postBody, [e.target.name] : e.target.value});
-  }
-
-  const handelPost = async (e) => {
+  const handleStatusUpload = async (e) => {
     e.preventDefault();
 
     //payload
     let data = {
       "username": USERNAME,
       "userImg": USER_PROFILE.dp || user.dp,
-      "postImg": postImg,
-      "body": postBody
+      "statusImg": statusImg,
+      "body": caption
     };
 
     let options = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
-        'Authorization': `${TOKEN}`
+        'Authorization': `${ TOKEN }`
       },
       body: JSON.stringify(data)
     }
-    let res = await fetch(postSavePost, options);
+    let res = await fetch(postUploadStauts, options);
 
     // get the output as a responce from the server
     let output = await res.json();
 
     if (output.status) {
-      setShowPostModal(false);
+      setShowStatusUploadModal(false);
       location.reload();
     }
     else {
@@ -70,19 +64,21 @@ export default function PostModal({setShowPostModal, user}) {
     }
   }
 
+  const handelCaptions = (e) => {
+    setCaption(e.target.value);
+  }
+
   return (
     <StyledDiv>
-      <h3> Post  </h3>
-
-      <div className="img-wrapper" onClick={handelImage}>
-        <img src={postImg} />
+      <div className="wrapper">
+        <div className="img-wrapper" onClick={handelImage}>
+          <img src={statusImg} />
+        </div>
+        <input id="caption" type="text" placeholder="Captions.." onChange={handelCaptions}/>
       </div>
-
-      <input type="text" name="title" placeholder="Tile of the post ..." onChange={handelChage} />
-      <textarea name="body" placeholder="Write something about the post..." onChange={handelChage} ></textarea>
       <div className="action">
-        <button id="cancel" onClick={() => setShowPostModal(false)} >Cancel</button>
-        <button onClick={handelPost}>Post it</button>
+        <button id="cancel" onClick={ () => setShowStatusUploadModal(false) }>Cancel</button>
+        <button onClick={handleStatusUpload}>Upload</button>
       </div>
     </StyledDiv>
   )
@@ -95,6 +91,21 @@ const StyledDiv = styled.div`
   padding: 30px;
   background-color: white;
   border-radius: 15px;
+  .wrapper {
+    position: relative;
+
+    #caption{
+      border: none;
+      outline: none;
+      background-color: #ffffffa7;
+      backdrop-filter: blur(2px);
+      width: 280px;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+    }
+
+  }
 
   .img-wrapper{
     width: 300px;

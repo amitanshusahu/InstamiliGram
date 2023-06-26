@@ -5,10 +5,12 @@ import PostModal from './components/main/components/PostModal';
 import { useEffect } from 'react';
 import userImg from '../assets/user.png'
 import { USERNAME, USER_PROFILE, postGetProfile } from '../kv';
+import StatusUploadModal from './components/main/components/StatusUploadModal';
 
 export default function Home({ component }) {
 
-  const [isShowModal, setShowModal] = useState(false);
+  const [isShowModal, setShowPostModal] = useState(false);
+  const [isShowStatusUploadModal, setShowStatusUploadModal] = useState(false);
   const [user, setUser] = useState({
     dp: userImg
   });
@@ -41,7 +43,7 @@ export default function Home({ component }) {
       }
     }
 
-    if(!USER_PROFILE) {
+    if (!USER_PROFILE) {
       fetchUserProfile();
     }
   }, [])
@@ -51,12 +53,19 @@ export default function Home({ component }) {
 
       {isShowModal
         ? <div id="modal">
-          <PostModal setShowModal={setShowModal} user={user}/>
+          <PostModal setShowPostModal={setShowPostModal} user={user} />
         </div>
         : null
       }
 
-      <Nav setShowModal={setShowModal} user={user}/>
+      {isShowStatusUploadModal
+        ? <div id="modal">
+          <StatusUploadModal setShowStatusUploadModal={setShowStatusUploadModal} user={user}/>
+        </div>
+        : null
+      }
+
+      <Nav setShowPostModal={setShowPostModal} setShowStatusUploadModal={setShowStatusUploadModal} user={user} />
       {component}
     </StyledLayout>
   )

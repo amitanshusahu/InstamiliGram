@@ -8,7 +8,7 @@ module.exports.savepost = (req, res) => {
   if (req.user.username == username) {
     PostModel.create({ username, userImg, postImg, body })
       .then((post) => {
-        res.status(200).json({ status: true, post });
+        res.status(200).json({ status: true});
         console.log("Post saved to the db");
       })
       .catch(er => {
@@ -23,38 +23,6 @@ module.exports.savepost = (req, res) => {
 
 };
 
-async function getPosts(contacts) {
-  let posts = [];
-
-  const promises = contacts.map(contact =>
-    PostModel.find({ username: contact.username })
-      .then(postsObj => {
-        posts.push(postsObj);
-      })
-      .catch(e => {
-        console.log("Error getting posts", e);
-      })
-  );
-
-  await Promise.all(promises);
-
-  return posts;
-}
-
-// module.exports.getFeed = async ( req, res ) => {
-//   try{
-//     let contacts = await contactModel.findOne({username : req.user.username});
-
-//     if ( contacts ) {
-//       contacts.contacts.push({username: req.user.username});
-//       let posts = await getPosts(contacts.contacts);
-//       if (posts.length > 0) res.status(200).json({ status: true, posts });
-//       else res.status(400).json({ status: false, msg: 'No Posts Found!!' });
-//     } else res.status(400).json({status: false, msg: "No contacts Found!!"});
-
-//   }
-//   catch (e) {console.log(e)}
-// }
 
 module.exports.getFeed = async (req, res) => {
   let contacts = await contactModel.findOne({ username: req.user.username });

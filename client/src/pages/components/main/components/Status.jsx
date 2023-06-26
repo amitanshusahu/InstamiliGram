@@ -1,16 +1,32 @@
 import styled from "styled-components"
 import user from '../../../../assets/user.png'
 import { USER_PROFILE } from "../../../../kv"
+import nostatus from '../../../../assets/status.jpg';
 
 
-export default function Status() {
+export default function Status({ setIsShowStautsModal, status, setStatusToShow }) {
   return (
-    <StyledDiv>
+    <StyledDiv id="status-bar">
       <div className="wrapper">
 
-        <div className="status" id="my-status">
-          <img src={ USER_PROFILE ?  USER_PROFILE.dp : user} />
-        </div>
+        {status
+          ? status.map(stat => {
+            return (
+              <div className="status" id="my-status" onClick={() => {
+                setIsShowStautsModal(true)
+                setStatusToShow({ statusImg: stat.statusImg, caption: stat.body, username: stat.username})
+              }}>
+                <img src={stat.userImg} />
+              </div>
+            )
+          }).reverse()
+          : <div className="status" id="my-status" onClick={() => {
+            setIsShowStautsModal(true)
+            setStatusToShow({ statusImg: nostatus, caption: "No Status, Your Status Will Show Here" })
+            }}>
+            <img src={USER_PROFILE ? USER_PROFILE.dp : user} />
+          </div>
+        }
 
 
       </div>
@@ -24,6 +40,7 @@ const StyledDiv = styled.div`
   overflow-x: auto;
   border-radius: 15px;
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.02);
+  position: relative;
 
   .wrapper{
     padding: 30px;
