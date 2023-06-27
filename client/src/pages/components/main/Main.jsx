@@ -72,6 +72,7 @@ const StyledDiv = styled.div`
   flex-direction: column;
   overflow-x: hidden;
   overflow-y: auto;
+  scroll-behavior: smooth;
 
   .main-util{
     left: 0;

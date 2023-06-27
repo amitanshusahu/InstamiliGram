@@ -1,6 +1,7 @@
 const StatusModel = require("../models/StatusModel");
 const contactModel = require('../models/ContactsModel');
 const UserProfile = require('../models/userProfileModel');
+const NotificationModel = require('../models/NotificationModel');
 
 module.exports.uploadStatus = async (req, res) => {
   let { username, userImg, statusImg, body } = req.body;

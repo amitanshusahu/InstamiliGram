@@ -7,8 +7,7 @@ import Home from "./pages/Home";
 import Chat from "./pages/components/chat/Chat";
 import Main from "./pages/components/main/Main";
 import Notification from "./pages/components/notification/Notificatio";
-import Rell from "./pages/components/reel/Reel"
-import Trending from "./pages/components/trending/Trending";
+import Contacts from "./pages/components/contacts/Contacts"
 import Profile from "./pages/components/profile/Profile";
 
 function App() {
@@ -21,9 +20,8 @@ function App() {
                 <Route path="/createprofile" element={<CreateProfile />}/>
                 <Route path="/home" element={<Home component={<Main />}/>}/>
                 <Route path="/chat" element={<Home component={<Chat />}/>}/>
-                <Route path="/reel" element={<Home component={<Rell />}/>}/>
+                <Route path="/contacts" element={<Home component={<Contacts />}/>}/>
                 <Route path="/notification" element={<Home component={<Notification />}/>}/>
-                <Route path="/trending" element={<Home component={<Trending />}/>}/>
                 <Route path="/:username" element={<Home component={<Profile />}/>}/>
             </Routes>
         </BrowserRouter>

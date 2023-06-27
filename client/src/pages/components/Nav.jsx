@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Chat, Trending, Reel, Bell, Home, Add } from '../../assets/icons'
+import { Chat, Trending, Contacts, Bell, Home, Add } from '../../assets/icons'
 import { useNavigate } from "react-router-dom";
 import { USERNAME, USER_PROFILE } from "../../kv";
 
@@ -15,8 +15,7 @@ export default function Nav({setShowPostModal, setShowStatusUploadModal, user}) 
           </div>
           <li onClick={ () => navigate('../home') }> <Home /> </li>
           <li onClick={ () => navigate('../chat') }> <Chat /> </li>
-          <li onClick={ () => navigate('../trending') }> <Trending /> </li>
-          <li onClick={ () => navigate('../reel') }> <Reel /> </li>
+          <li onClick={ () => navigate('../contacts') }> <Contacts /> </li>
           <li onClick={ () => navigate('../notification') }> <Bell /> </li>
         </menu>
         
@@ -26,7 +25,10 @@ export default function Nav({setShowPostModal, setShowStatusUploadModal, user}) 
             <ul id="action-modal">
               <li onClick={ () => {setShowPostModal(true)}}> <button>⭐ Create A Post</button></li>
               <li onClick={ () => {setShowStatusUploadModal(true)}}> <button>⭐ Update Status</button></li>
-              <li> <button style={{color: "lightcoral"}}>💔 Logout</button></li>
+              <li> <button style={{color: "lightcoral"}} onClick={ () => {
+                localStorage.clear();
+                location.reload();
+              }} >💔 Logout</button></li>
             </ul>
 
             <Add /> 

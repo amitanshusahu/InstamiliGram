@@ -12,8 +12,12 @@ export const postFollow = 'http://localhost:3000/api/contact/follow';
 export const postUnFollow = 'http://localhost:3000/api/contact/unfollow';
 export const postUploadStauts = 'http://localhost:3000/api/status/uploadstatus';
 export const getStauts = 'http://localhost:3000/api/status/getStatus';
+export const getFollowers = 'http://localhost:3000/api/contact/getfollowers';
+export const getNotification = 'http://localhost:3000/api/contact/getnotification';
+export const getContacts = 'http://localhost:3000/api/contact/getcontacts';
 
 // User / auth
 export const TOKEN = localStorage.getItem("TOKEN");
 export const USERNAME = localStorage.getItem("USERNAME");
 export const USER_PROFILE = JSON.parse(localStorage.getItem("USER_PROFILE"));
+export const CONTACTS = JSON.parse(localStorage.getItem("CONTACTS"));   

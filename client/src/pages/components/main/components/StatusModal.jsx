@@ -33,6 +33,8 @@ const StyledDiv = styled.div`
   }
   a {
     color: #2c2c2c;
+    margin: 15px;
+    font-weight: bold;
   }
   .caption{
     width: 100%;
@@ -40,16 +42,15 @@ const StyledDiv = styled.div`
     bottom: 0; 
     left: 0;
     height: 50px;
-    padding: 15px;
+    padding: 15px 0;
     overflow-x: hidden;
     overflow-y: auto;
     background-color: #ffffff9b;
     backdrop-filter: blur(2px);
-    font-weight: bold;
-    font-size:  15px;
 
     p{
       margin-top: 5px;
+      margin: 5px 15px;
     }
   }
 `
