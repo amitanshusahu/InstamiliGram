@@ -11,6 +11,7 @@ const userProfileRoutes = require('./routes/userProfileRoute');
 const postRoutes = require('./routes/postRoutes');
 const contactRoutes = require('./routes/contactRoutes');
 const statusRoutes = require('./routes/statusRoutes');
+const messageRoutes = require('./routes/messageRoutes');
 
 // MiddleWares
 app.use(cors());
@@ -23,6 +24,7 @@ app.use('/api/user', userProfileRoutes);
 app.use('/api/post', postRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/status', statusRoutes);
+app.use('/api/msg', messageRoutes);
 
 
 app.listen(port, () => {
