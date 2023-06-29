@@ -74,15 +74,16 @@ align-items: center;
 justify-content: center;
 
 .login-holder{
-    display: flex;
+  display: flex;
     flex-direction: column;
     gap: 15px;
     min-width: 300px;
-
     h1{
         text-align: center;
+        margin-left: -20px;
+        margin-bottom: -50px;
         img {
-          width: 200px;
+          width: 300px;
         }
     }
 

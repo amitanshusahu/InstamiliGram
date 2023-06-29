@@ -80,8 +80,10 @@ justify-content: center;
     min-width: 300px;
     h1{
         text-align: center;
+        margin-left: -20px;
+        margin-bottom: -50px;
         img {
-          width: 200px;
+          width: 300px;
         }
     }
 
