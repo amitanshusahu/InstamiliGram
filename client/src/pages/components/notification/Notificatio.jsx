@@ -64,7 +64,7 @@ export default function Notification() {
                 </div>
               </div>
             )
-          })
+          }).reverse()
           : null
         }
 
@@ -75,6 +75,9 @@ export default function Notification() {
 
 const StyledDiv = styled.div`
   padding: 60px;
+  height: calc(100vh - 120px);
+  overflow: hidden;
+  overflow-y: scroll;
 
   #time{
     color: grey;

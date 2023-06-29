@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { TOKEN, USER_PROFILE, CONTACTS, getFollowers, getContacts } from "../../../kv"
 import { Link, useNavigate } from "react-router-dom"
 import styled from "styled-components";
+import nofollow from '../../../assets/notfollowing.webp'
 
 export default function Contacts() {
 
@@ -80,7 +81,9 @@ export default function Contacts() {
       <div className="following-wrapper">
         <div id="follow-holder">
           <h2>Following ({contacts ? contacts?.contacts?.length : null}) </h2>
-          <div className="following">
+          
+          {(contacts?.contacts.length > 0)
+            ? <div className="following">
             {contacts?.contacts
               ? contacts.contacts.map(contact => {
                 return (
@@ -95,6 +98,13 @@ export default function Contacts() {
               : null
             }
           </div>
+          : <div className="nofollow">
+            <div className="img-wrapper">
+              <img src={nofollow} />
+            </div>
+          </div>
+          }
+
         </div>
         
             <div className="followed">
@@ -118,8 +128,9 @@ const StyledDiv = styled.div`
   padding: 30px;
   display: flex;
   flex-direction: column;
+  height: calc(100vh - 60px);
   overflow: hidden;
-  overflow-y: auto;
+  overflow-y: scroll;
 
   a{
     color: inherit;
@@ -171,6 +182,13 @@ const StyledDiv = styled.div`
       list-style: none;
       color: grey;
     }
+  }
+
+  .nofollow{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
   }
 
   .following-wrapper{

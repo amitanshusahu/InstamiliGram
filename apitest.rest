@@ -162,8 +162,7 @@ Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFtaXRoIiwiaWF0IjoxNjg3MzA0NzMzfQ.MGloCJNCk0HCfnByoXy67te7OoptxTCEbyTixIUrSXY
 
 {
-  "from": "amith",
-  "to": "yumisan",
+  "to": "amitanshu_sahu",
   "msg": "hope you are fine, i need a favour"
 }
 
@@ -174,6 +173,5 @@ Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFtaXRoIiwiaWF0IjoxNjg3MzA0NzMzfQ.MGloCJNCk0HCfnByoXy67te7OoptxTCEbyTixIUrSXY
 
 {
-  "from": "amith",
   "to": "yumisan"
 }

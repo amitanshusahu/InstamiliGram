@@ -15,6 +15,8 @@ export const getStauts = 'http://localhost:3000/api/status/getStatus';
 export const getFollowers = 'http://localhost:3000/api/contact/getfollowers';
 export const getNotification = 'http://localhost:3000/api/contact/getnotification';
 export const getContacts = 'http://localhost:3000/api/contact/getcontacts';
+export const postMsg = 'http://localhost:3000/api/msg/savemsg';
+export const getMsg = 'http://localhost:3000/api/msg/getmsg';
 
 // User / auth
 export const TOKEN = localStorage.getItem("TOKEN");

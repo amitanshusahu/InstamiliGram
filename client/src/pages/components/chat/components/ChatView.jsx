@@ -1,48 +1,126 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
+import { TOKEN, USERNAME, postMsg } from '../../../../kv';
+import nomsg from '../../../../assets/nomessage.webp'
 
-export default function ChatView({ selectedUser, setMsg, msg }) {
+export default function ChatView({ selectedUser, setMsg, msg, socket }) {
 
   const [input, setInput] = useState(null);
+  const [isOnline, setIsOnline] = useState(false);
+  const scrollRef = useRef();
+  const inputRef = useRef();
+
+  useEffect(() => {
+    if (socket && selectedUser && msg) {
+      // check if selectedUser.username is online
+      socket.emit('isOnline', selectedUser.username, cb => {
+        setIsOnline(cb);
+      })
+      // recieve msg
+      socket.on('recieve-msg', ms => {
+        setMsg([...msg, { msg: ms, from: selectedUser.username }]);
+      })
+    }
+  }, [selectedUser, msg])
+
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [msg]);
 
   const handelInput = (e) => {
     setInput(e.target.value);
   }
 
-  const handelMsgSend = () => {
-    setMsg([...msg, input]);
+  const handelMsgSend = async () => {
+    setMsg([...msg, { msg: input, from: USERNAME }]);
+
+    //payload
+    let data = {
+      'to': selectedUser.username,
+      'msg': input
+    };
+
+    let options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        'Authorization': `${TOKEN}`
+      },
+      body: JSON.stringify(data)
+    }
+    let res = await fetch(postMsg, options);
+
+    // get the output as a responce from the server
+    let output = await res.json();
+
+    if (output.status) {
+      console.log("message saved");
+    }
+    else {
+      alert(output.msg);
+    }
+
+    inputRef.current.value = "";
+
+    if (socket) {
+      // send msg
+      let msgData = {
+        to: selectedUser.username,
+        msg: input
+      }
+      socket.emit('send-msg', msgData, cb => {
+        setIsOnline(cb);
+      })
+    }
   }
 
-  return (
-    <StyledDiv>
-      <div className="header">
-        <div className="img-wrapper">
-          <img src={selectedUser ? selectedUser.dp : null} />
+  if (selectedUser) {
+    return (
+      <StyledDiv>
+        <div className="header">
+          <div className="img-wrapper">
+            <img src={selectedUser ? selectedUser.dp : null} />
+          </div>
+          <div className='head-info'>
+            <h3>{selectedUser ? selectedUser.username : "InstaMiliuser"}</h3>
+            <p style={{ color: isOnline ? "lightgreen" : "grey" }} >{isOnline ? "online" : " offline"}</p>
+          </div>
         </div>
-        <h3>{selectedUser ? selectedUser.username : "InstaMiliuser"}</h3>
-      </div>
 
-      <div className="chat">
+        <div className="chat" ref={scrollRef} id='scroll'>
 
-        {(msg?.length > 0)
-          ? msg.map(m => {
-            return (
-              <div className="msg">
-                {m}
-              </div>
-            )
-          })
-          : null
-        }
+          {(msg?.length > 0)
+            ? msg.map(m => {
+              return (
+                <div className="msg" style={{ alignSelf: (m.from == USERNAME) ? "flex-end" : "flex-start" }}>
+                  {m.msg}
+                </div>
+              )
+            })
+            : null
+          }
 
-      </div>
+        </div>
 
-      <div className="input">
-        <input type="text" placeholder='Type Your Message Here...' onChange={handelInput} />
-        <button onClick={handelMsgSend}>send</button>
-      </div>
-    </StyledDiv>
-  )
+        <div className="input">
+          <input type="text" placeholder='Type Your Message Here...' ref={inputRef} onChange={handelInput} />
+          <button onClick={handelMsgSend}>send</button>
+        </div>
+      </StyledDiv>
+    )
+  }
+  else {
+    return (
+      <StyledWrapper>
+        <div className="img-wrapper">
+          <img src={nomsg} />
+        </div>
+      </StyledWrapper>
+    )
+  }
 }
 
 const StyledDiv = styled.div`
@@ -81,7 +159,8 @@ const StyledDiv = styled.div`
     height: calc(100vh - 292px);
     display: flex;
     flex-direction: column;
-    overflow-y: auto;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
   }
 
   .input{
@@ -104,4 +183,10 @@ const StyledDiv = styled.div`
     padding: 15px;
     border-radius: 10px;
   }
+`
+
+const StyledWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
