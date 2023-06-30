@@ -26,7 +26,7 @@ git clone "https://github.com/amitanshusahu/InstamiliGram" && cd InstamiliGram"
 ```bash
 cd server && npm start
 ```
-> Note: you will require Node 19+ because of the --watch flag, if you have Node 18-, then `node server.js` to start the server
+> Note: you will require Node 19+ because of the --watch flag, if you have Node 18-, then `node index.js` to start the server
 
 - go to `client` folder and start
 ```bash
