@@ -13,6 +13,8 @@
   
   ![Screenshot 2023-06-29 at 21-02-41 Vite React](https://github.com/amitanshusahu/InstamiliGram/assets/83657737/5fe5b797-e8db-4a33-b7e1-09429f3dd96b)
 
+  [🔴 watch demo on youtube](https://youtu.be/cenqmzW2s04)
+
 </div>
 
 ---
