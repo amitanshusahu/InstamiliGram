@@ -22,7 +22,7 @@
 ## 📌 Set up project
 - clone the repo
 ```bash
-git clone "https://github.com/amitanshusahu/InstamiliGram" && cd InstamiliGram"
+git clone "https://github.com/amitanshusahu/InstamiliGram" && cd InstamiliGram
 ```
 - go to `server` folder and start server
 ```bash
