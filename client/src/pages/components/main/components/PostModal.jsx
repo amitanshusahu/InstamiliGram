@@ -1,15 +1,45 @@
 import styled from "styled-components"
 import uploadIcon from "../../../../assets/upload.jpg"
 import { useState } from "react";
-import { TOKEN, USERNAME, USER_PROFILE, postSavePost } from "../../../../kv";
+import { TOKEN, USERNAME, USER_PROFILE, getMe, postSavePost } from "../../../../kv";
+import { useEffect } from "react";
 
 export default function PostModal({setShowPostModal, user}) {
 
   const [postImg, setPostImg] = useState(uploadIcon);
+  const [userprofile, setUserProfile] = useState(USER_PROFILE);
   const [postBody, setPostBody] = useState({
     title: null,
     body: null,
   });
+
+  useEffect(() => {
+    if (!USER_PROFILE) {
+      async function doFetch() {
+
+        let res = await fetch(getMe, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+            'Authorization': `${TOKEN}`
+          },
+        });
+
+        // get the output as a responce from the server
+        let output = await res.json();
+
+        if (output.status) {
+          localStorage.setItem("USER_PROFILE", JSON.stringify(output.user));
+          setUserProfile(output.user);
+        }
+        else {
+          console.log(output.msg);
+        }
+      }
+
+      doFetch();
+    }
+  }, []); 
 
   const handelImage = (e) => {
     // create a file input dynamically
@@ -43,7 +73,7 @@ export default function PostModal({setShowPostModal, user}) {
     //payload
     let data = {
       "username": USERNAME,
-      "userImg": USER_PROFILE.dp || user.dp,
+      "userImg": userprofile.dp || user.dp,
       "postImg": postImg,
       "body": postBody
     };

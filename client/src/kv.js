@@ -2,6 +2,7 @@
 export const postLogin = 'http://localhost:3000/api/auth/login';
 export const postSignup = 'http://localhost:3000/api/auth/signup';
 export const postCreateProfile = 'http://localhost:3000/api/user/createprofile';
+export const getMe = 'http://localhost:3000/api/user/me';
 export const postCreateContact = 'http://localhost:3000/api/contact/createcontact';
 export const postGetProfile = 'http://localhost:3000/api/user/getprofile';
 export const postSavePost = 'http://localhost:3000/api/post/savepost';

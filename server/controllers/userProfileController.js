@@ -29,3 +29,10 @@ module.exports.getUserProfile = async (req, res) => {
   else res.status(400).json({ status: false, msg: "No Such User Found" });
 
 }
+
+module.exports.me = async (req, res) => {
+  let user = await UserProfile.findOne({username: req.user.username});
+
+  if (user) res.status(200).json({ status: true, user });
+  else res.status(400).json({ status: false, msg: "No Such User Found" });
+}

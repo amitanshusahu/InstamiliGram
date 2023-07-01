@@ -8,6 +8,35 @@ export default function StatusUploadModal({ setShowStatusUploadModal, user}) {
 
   const [statusImg, setstatusImg] = useState(uploadIcon);
   const [caption , setCaption] = useState();
+  const [userprofile, setUserProfile] = useState(USER_PROFILE);
+
+  useEffect(() => {
+    if (!USER_PROFILE) {
+      async function doFetch() {
+
+        let res = await fetch(getMe, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+            'Authorization': `${TOKEN}`
+          },
+        });
+
+        // get the output as a responce from the server
+        let output = await res.json();
+
+        if (output.status) {
+          localStorage.setItem("USER_PROFILE", JSON.stringify(output.user));
+          setUserProfile(output.user);
+        }
+        else {
+          console.log(output.msg);
+        }
+      }
+
+      doFetch();
+    }
+  }, []);
 
   const handelImage = (e) => {
     // create a file input dynamically
@@ -37,7 +66,7 @@ export default function StatusUploadModal({ setShowStatusUploadModal, user}) {
     //payload
     let data = {
       "username": USERNAME,
-      "userImg": USER_PROFILE.dp || user.dp,
+      "userImg": userprofile.dp || user.dp,
       "statusImg": statusImg,
       "body": caption
     };
