@@ -27,7 +27,7 @@ app.use('/api/post', postRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/status', statusRoutes);
 app.use('/api/msg', messageRoutes);
-app.get('/api', (req, res) => {
+app.get('/', (req, res) => {
   res.json({status: true, msg: "server is working as expected"});
 })
 
